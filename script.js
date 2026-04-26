@@ -37,24 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add mouse movement effect to hero image placeholder
-    const heroImage = document.querySelector('.image-placeholder');
+    // Add mouse movement effect to abstract shape
+    const heroShape = document.querySelector('.abstract-shape');
     const heroSection = document.querySelector('.hero');
 
-    if (heroImage && heroSection) {
+    if (heroShape && heroSection) {
         heroSection.addEventListener('mousemove', (e) => {
             const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            heroImage.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            // Add mouse movement to the existing 3D rotation
+            heroShape.style.transform = `rotateX(${60 + yAxis}deg) rotateY(${xAxis}deg) rotateZ(45deg)`;
         });
 
         heroSection.addEventListener('mouseleave', () => {
-            heroImage.style.transform = `rotateY(-15deg) rotateX(10deg)`;
-            heroImage.style.transition = 'transform 0.5s ease';
+            heroShape.style.transform = `rotateX(60deg) rotateY(0deg) rotateZ(45deg)`;
+            heroShape.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
         });
 
         heroSection.addEventListener('mouseenter', () => {
-            heroImage.style.transition = 'none';
+            heroShape.style.transition = 'transform 0.1s ease';
         });
     }
 
