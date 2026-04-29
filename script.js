@@ -152,12 +152,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Contact form ===
     const form = document.getElementById('contact-form');
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = form.querySelector('.btn-submit span');
             const originalText = btn.textContent;
-            btn.textContent = 'Message Sent! ✓';
-            form.reset();
+            
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+            
+            try {
+                btn.textContent = 'Sending...';
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    btn.textContent = 'Message Sent! ✓';
+                    form.reset();
+                    if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
+                    if (typeof confetti === 'function') confetti();
+                } else {
+                    btn.textContent = 'Failed to Send ✗';
+                    if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
+                }
+            } catch (error) {
+                btn.textContent = 'Error occurred ✗';
+            }
+            
             setTimeout(() => { btn.textContent = originalText; }, 3000);
         });
     }

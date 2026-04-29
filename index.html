@@ -292,18 +292,20 @@
                     </div>
                     <div class="contact-form-wrapper">
                         <form class="contact-form" id="contact-form">
+                            <input type="hidden" name="access_key" value="5c5d2e3e-3652-43b0-bc24-0653a8a3c5aa">
                             <div class="form-group">
-                                <input type="text" id="contact-name" placeholder=" " required>
+                                <input type="text" id="contact-name" name="name" placeholder=" " required>
                                 <label for="contact-name">Your Name</label>
                             </div>
                             <div class="form-group">
-                                <input type="email" id="contact-email" placeholder=" " required>
+                                <input type="email" id="contact-email" name="email" placeholder=" " required>
                                 <label for="contact-email">Your Email</label>
                             </div>
                             <div class="form-group">
-                                <textarea id="contact-message" rows="4" placeholder=" " required></textarea>
+                                <textarea id="contact-message" name="message" rows="4" placeholder=" " required></textarea>
                                 <label for="contact-message">Message</label>
                             </div>
+                            <div class="h-captcha" data-captcha="true" style="margin-bottom: 1.5rem;"></div>
                             <button type="submit" class="btn btn-primary btn-submit" id="contact-submit">
                                 <span>Send Message</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -325,6 +327,8 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
     <script src="script.js"></script>
 </body>
 </html>
